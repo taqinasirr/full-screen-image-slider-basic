@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <section class="image-slider-section">
+        <div class="arrow arrow-left"></div>
+        <div class="arrow arrow-right"></div>
+
+        <div class="image-container">
+            <div class="divImage divImage1">
+                <div class="div-content">
+                    <span>image one</span>
+                </div>
+            </div>
+            <div class="divImage divImage2">
+                <div class="div-content">
+                    <span>image two</span>
+                </div>
+            </div>
+            <div class="divImage divImage3">
+                <div class="div-content">
+                    <span>image three</span>
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+
+
+    <!-- image-slider script -->
+    <script>
+        let sliderImages = document.querySelectorAll(".divImage"),
+            arrowLeft = document.querySelector(".arrow-left"),
+            arrowRight = document.querySelector(".arrow-right"),
+            current = 0;  // by default current image adalah image index 0
+
+      
+        //display none tak kisah samada kita kat sliderImages[0] or sliderImages[1] or sliderImages[3]
+        //maksudnya kita nak clear images 
+        function reset(){
+            for(let i = 0; i < sliderImages.length; i++){
+                sliderImages[i].style.display = 'none';
+                // length adalah 3. index adalah 0,1,2
+            }
+        }   
+
+        //init slider. so ini yg user nmpak bila mula2 bukak web tu.
+        function startSlide(){
+            reset();
+            sliderImages[0].style.display ='block';
+        } 
+        
+        //function show previous 
+        function slideLeft() {
+            reset();
+            sliderImages[current - 1].style.display = "block";
+            current--;
+        }
+
+        //function show next
+        function slideRight() {
+            reset();
+            sliderImages[current + 1].style.display ='block';
+            current++;
+        }
+
+        //left arrow click
+        arrowLeft.addEventListener('click', function (){
+            if(current === 0){
+                current = sliderImages.length;
+            }
+            slideLeft();
+        });
+              
+
+        //right arrow click
+        arrowRight.addEventListener('click', function(){
+            if(current === sliderImages.length - 1){
+                current = -1;
+            };
+            slideRight();
+
+            //if length 2 ( maksudnya index 1),
+            //current = index 1-1.  so current adalah 0
+           
+        });
+
+
+        // call startSlide()
+        startSlide();
+       
+    </script>
+
+</body>
+
+</html>
